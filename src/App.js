@@ -1,18 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Amplify from "aws-amplify";
-import awsconfig from "./aws-exports"
-import {AmplifySignOut, withAuthenticator} from "@aws-amplify/ui-react"
+import{ Auth} from "aws-amplify";
 
-Amplify.configure(awsconfig);
+
 
 function App() {
   return (
     <div className="App">
-      <AmplifySignOut />
+      <button onClick={() => Auth.federatedSignIn()}>Sign in</button>
+      <button onClick={() => Auth.signOut()}>Sign out</button>
+
     </div>
   );
 }
 
-export default withAuthenticator(App);
+export default App;
