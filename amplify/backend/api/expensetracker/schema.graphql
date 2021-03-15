@@ -1,0 +1,21 @@
+type Transaction @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  from: BankAccount @connection(name: "fromAccount")
+  to: BankAccount @connection(name: "toAccount")
+  category: Category!
+  amount: Float!
+  timestamp: AWSDateTime!
+}
+
+type BankAccount @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  description: String
+  outgoingTransactions: [Transaction] @connection(name: "fromAccount")
+  incomingTransactions: [Transaction] @connection(name: "toAccount")
+}
+
+type Category @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+}
